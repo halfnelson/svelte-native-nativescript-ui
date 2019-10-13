@@ -5,7 +5,7 @@ import pkg from './package.json'
 
 let externalModules = pkg.peerDependencies ? Object.keys(pkg.peerDependencies) : []
 
-let localModules = ["sidedrawer"]
+let localModules = ["sidedrawer", "listview"]
 
 let plugins = [
   resolve({
@@ -13,7 +13,7 @@ let plugins = [
   }),
   typescript({
     typescript: require('typescript'),
-    useTsconfigDeclarationDirarationDir: false
+    useTsconfigDeclarationDir: true
   })
 ]
 

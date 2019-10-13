@@ -9,8 +9,8 @@ npm install any support nativescript ui packages you wish to use.
 
 Currently supported:
 
-    * RadSideDrawer [nativescript-ui-sidedrawer](https://www.npmjs.com/package/nativescript-ui-sidedrawer)
-    * RadListView [nativescript-ui-listview](https://www.npmjs.com/package/nativescript-ui-listview)
+* RadSideDrawer ([nativescript-ui-sidedrawer](https://www.npmjs.com/package/nativescript-ui-sidedrawer))
+* RadListView ([nativescript-ui-listview](https://www.npmjs.com/package/nativescript-ui-listview))
     
 
 In your project's `app.ts` file, add:

@@ -11,6 +11,9 @@
       "moduleResolution": "node",
       "allowSyntheticDefaultImports": false,
       "esModuleInterop": false,   
+      "types": [
+        "./node_modules/svelte-native"
+      ]
     },
     "include": [
       "src/**/*"

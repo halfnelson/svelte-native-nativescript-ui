@@ -36,9 +36,9 @@
     "tns-core-modules": "^6.1.1",
     "typescript": "^3.6.4",
     "rimraf": "^2.6.3",
-    "svelte-native": "~0.5.1"
+    "svelte-native": "~0.5.1",
+    "nativescript-ui-sidedrawer": "^7.0.2",
+    "nativescript-ui-listview": "7.0.2"
   },
-  "dependencies": {
-    "nativescript-ui-sidedrawer": "^7.0.2"
-  }
+  "dependencies": {}
 }

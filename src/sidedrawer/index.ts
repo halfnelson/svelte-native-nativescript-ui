@@ -3,7 +3,7 @@ import { NativeElementNode } from "svelte-native/dom";
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 
 
-export default class SideDrawerElement extends NativeElementNode {
+export default class RadSideDrawerElement extends NativeElementNode {
     constructor() {
         let RadSideDrawer = require('nativescript-ui-sidedrawer').RadSideDrawer;
         super('radSideDrawer',  RadSideDrawer, null);
@@ -30,6 +30,6 @@ export default class SideDrawerElement extends NativeElementNode {
     }
 
     static register() {
-        registerElement('radSideDrawer', () => new SideDrawerElement());
+        registerElement('radSideDrawer', () => new RadSideDrawerElement());
     }
 }
