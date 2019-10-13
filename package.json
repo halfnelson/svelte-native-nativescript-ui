@@ -1,0 +1,44 @@
+{
+  "name": "svelte-native-nativescript-ui",
+  "version": "6.1.1",
+  "description": "Svelte Native support for Nativescript UI",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halfnelson/svelte-native-nativescript-ui.git"
+  },
+  "keywords": [
+    "sveltejs",
+    "nativescript",
+    "nativescript-ui",
+    "svelte-native"
+  ],
+  "author": "David Pershouse",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/halfnelson/svelte-native-nativescript-ui/issues"
+  },
+  "homepage": "https://github.com/halfnelson/svelte-native-nativescript-ui#readme",
+  "peerDependencies": {
+    "svelte-native": "~0.5.1"
+  },
+  "scripts": {
+    "clean": "npx rimraf ./dist/*",
+    "build": "npm run clean && rollup -c && node ./scripts/create-pkg.js",
+    "watch": "rollup -cw",
+    "deploy": "npm run build && cd dist && echo npm publish"
+  },
+  "devDependencies": {
+    "glob": "^7.1.3",
+    "rollup": "^1.20.3",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.24.0",
+    "svelte": "^3.12.1",
+    "tns-core-modules": "^6.1.1",
+    "typescript": "^3.6.4",
+    "rimraf": "^2.6.3",
+    "svelte-native": "~0.5.1"
+  },
+  "dependencies": {
+    "nativescript-ui-sidedrawer": "^7.0.2"
+  }
+}
