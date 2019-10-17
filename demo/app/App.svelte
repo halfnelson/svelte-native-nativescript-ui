@@ -13,19 +13,19 @@
             </gridLayout>
         </radSideDrawer.drawerContent>
         <radSideDrawer.mainContent>
-            <gridLayout>
-                <label class="info" horizontalAlignment="center" verticalAlignment="center" textWrap="true">
-                    <formattedString>
-                        <span class="fas" text="&#xf135;" />
-                        <span text="Test" />
-                    </formattedString>
-                </label>
-            </gridLayout>
+           <ListViewPage />
         </radSideDrawer.mainContent>
     </radSideDrawer>
 </page>
 
 <script>
+    import { onMount } from 'svelte'
+    import * as nav from './Nav'
+
+    import ListViewPage from './pages/ListViewPage.svelte'
+  
     let drawer;
+    nav.init("navFrame")
+
 </script>
 

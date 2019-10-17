@@ -1,5 +1,5 @@
 import { NativeElementNode, createElement, registerElement } from "svelte-native/dom";
-import { RadListView, ListViewEventData } from "nativescript-ui-listview";
+import { RadListView, ListViewEventData, SwipeActionsEventData } from "nativescript-ui-listview";
 import { View } from "tns-core-modules/ui/core/view/view";
 
 export default class RadListViewElement extends NativeElementNode {
@@ -10,6 +10,7 @@ export default class RadListViewElement extends NativeElementNode {
 
         nativeView.itemViewLoader = (viewType: any): View => this.loadView(viewType)
         this.nativeView.on(RadListView.itemLoadingEvent, (args) => { this.updateListItem(args as ListViewEventData) });
+        this.nativeView.on(RadListView.itemSwipeProgressStartedEvent, (args) => { this.updateListItem(args as SwipeActionsEventData) });
     }
 
     private loadView(viewType: string): View {
@@ -18,6 +19,8 @@ export default class RadListViewElement extends NativeElementNode {
 
         console.log("creating view for ",viewType)
         let wrapper = createElement('StackLayout') as NativeElementNode;
+        wrapper.setStyle("margin", 0);
+        wrapper.setStyle("padding", 0);
         let componentInstance = new componentClass({
             target: wrapper,
             props: {
@@ -38,7 +41,7 @@ export default class RadListViewElement extends NativeElementNode {
         return templateEl.component;
     }
 
-    private updateListItem(args: ListViewEventData) {
+    private updateListItem(args: ListViewEventData | SwipeActionsEventData) {
         let item;
         let listView = this.nativeView as RadListView;
         let items = listView.items;
@@ -54,12 +57,18 @@ export default class RadListViewElement extends NativeElementNode {
             item = items[args.index]
         }
 
+        let componentInstance:SvelteComponent;
         if (args.view && (args.view as any).__SvelteComponent__) {
-            let componentInstance: SvelteComponent = (args.view as any).__SvelteComponent__
+            componentInstance = (args.view as any).__SvelteComponent__
+        } else if ((args as SwipeActionsEventData).swipeView && (args as any).swipeView.__SvelteComponent__) {
+            componentInstance = (args as any).swipeView.__SvelteComponent__
+        }
+
+        if (componentInstance) {
             console.log("updating view for ", args.index, args.view)
             componentInstance.$set({ item })
         } else {
-            console.log("got invalid update call with", args.index, args.view)
+            console.log("Couldn't find component for ", args.eventName, args.index, Object.keys(args), args.view, args.data);
         }
     }
 
