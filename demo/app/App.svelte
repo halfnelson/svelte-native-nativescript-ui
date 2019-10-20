@@ -1,5 +1,4 @@
-<page>
-    <actionBar title="Svelte Native App" />
+<page actionBarHidden="true">
     <radSideDrawer bind:this={drawer}>
         <radSideDrawer.drawerContent>
             <gridLayout rows="auto, *" >
@@ -13,7 +12,9 @@
             </gridLayout>
         </radSideDrawer.drawerContent>
         <radSideDrawer.mainContent>
-           <ListViewPage />
+            <frame id="navFrame">
+                <ListViewPage />
+           </frame>
         </radSideDrawer.mainContent>
     </radSideDrawer>
 </page>
