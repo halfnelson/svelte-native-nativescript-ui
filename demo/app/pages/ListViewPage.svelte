@@ -1,6 +1,6 @@
 <page>
     <actionBar title="RadListView" />
-    <radListView items={items} 
+    <radListView items={items} bind:this="{listView}"
             swipeActions="true" 
             pullToRefresh="true"
             itemReorder="true"
@@ -10,6 +10,7 @@
             on:pullToRefreshInitiated="{onPullToRefreshInitiated}"
             on:loadMoreDataRequested="{onLoadMoreDataRequested}"
             on:itemSwipeProgressStarted="{onitemSwipeProgressStarted}">
+
         <Template type="{ListViewViewType.ItemView}" let:item>
             <gridLayout columns="auto,*" class="item-template">
                 <image src="{item.image}" class="far" />
@@ -53,9 +54,11 @@
 </style>
 
 <script>
-    import { fade } from 'svelte-native/transitions'
+
+    import { onMount } from 'svelte'
     import { Template } from 'svelte-native/components'
-    import { ListViewViewType, ListViewLoadOnDemandMode } from "nativescript-ui-listview"
+    import { ObservableArray } from 'tns-core-modules/data/observable-array'
+    import { ListViewViewType, ListViewLoadOnDemandMode, ListViewLinearLayout, ListViewGridLayout, ListViewItemAnimation } from "nativescript-ui-listview"
 
     let images = [
         "font://\uf567",
@@ -76,20 +79,31 @@
         "font://\uf58B",
         "font://\uf58C"
     ]
+    
+    let listView;
 
     function generateItems(count, offset=0) {
         return (new Array(count).fill()).map((_, i) => ({ name: `Item ${i+offset}`, description: `Item ${i+offset} description`, image: images[(i+offset) % images.length]}))
     }
 
-    let items = generateItems(50);
+    onMount(() => {
+        let layout = new ListViewLinearLayout();
+        layout.itemDeleteAnimation = ListViewItemAnimation.Fade;
+        layout.itemInsertAnimation = ListViewItemAnimation.Fade;
+        let gridLayout = new ListViewGridLayout();
+        listView.nativeView.listViewLayout = layout;
+    })
+
+
+    let items = new ObservableArray(generateItems(50));
 
     function doDelete(item) {
         let idx = items.indexOf(item);
-        items = items.filter(i => i != item);
+        items.splice(idx,1);
     }
 
     function onItemTap({index}) {
-        alert(`Item tapped: ${items[index].name}`);
+        alert(`Item tapped: ${items.getItem(index).name}`);
     }
 
     function onitemSwipeProgressStarted({data, swipeView}) {
@@ -104,7 +118,7 @@
 
     function onPullToRefreshInitiated({object}) {
         refreshedCount++;
-        items = [{ name: `Refreshed item ${refreshedCount}`, description: `Item ${refreshedCount} was loaded via refresh`, image: images[refreshedCount % images.length] }, ...items];
+        items.unshift({ name: `Refreshed item ${refreshedCount}`, description: `Item ${refreshedCount} was loaded via refresh`, image: images[refreshedCount % images.length] });
         object.notifyPullToRefreshFinished()
     }
 
@@ -119,7 +133,7 @@
             listview.notifyLoadOnDemandFinished(true);
         } else {
             setTimeout(() => {
-                items = [...items, ...generateItems(50, items.length)]
+                items.push(generateItems(50, items.length));
                 listview.notifyLoadOnDemandFinished(items.length >= 150);
             }, 1500);
             args.returnValue = true;
