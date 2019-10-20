@@ -1,13 +1,11 @@
-import { NativeElementNode, createElement, registerElement } from "svelte-native/dom";
-import { RadListView, ListViewEventData, SwipeActionsEventData } from "nativescript-ui-listview";
-import { View } from "tns-core-modules/ui/core/view/view";
+import { NativeViewElementNode, createElement, registerElement, NativeElementNode, logger } from "svelte-native/dom";
+import { RadListView, ListViewEventData, SwipeActionsEventData, ListViewLinearLayout, ListViewGridLayout, ListViewStaggeredLayout, ListViewLayoutBase } from "nativescript-ui-listview";
+import { View } from "tns-core-modules/ui/core/view";
 
-export default class RadListViewElement extends NativeElementNode {
+export default class RadListViewElement extends NativeViewElementNode<RadListView> {
     constructor() {
-        let RadListView = require('nativescript-ui-listview').RadListView;
-        super('radlistview', RadListView, null);
-        let nativeView = this.nativeView as RadListView;
-
+        super('radlistview', RadListView);
+        let nativeView = this.nativeView;
         nativeView.itemViewLoader = (viewType: any): View => this.loadView(viewType)
         this.nativeView.on(RadListView.itemLoadingEvent, (args) => { this.updateListItem(args as ListViewEventData) });
         this.nativeView.on(RadListView.itemSwipeProgressStartedEvent, (args) => { this.updateListItem(args as SwipeActionsEventData) });
@@ -16,9 +14,8 @@ export default class RadListViewElement extends NativeElementNode {
     private loadView(viewType: string): View {
         let componentClass = this.getComponentForView(viewType);
         if (!componentClass) return null;
-
-        console.log("creating view for ",viewType)
-        let wrapper = createElement('StackLayout') as NativeElementNode;
+        logger.debug("creating view for " + viewType);
+        let wrapper = createElement('StackLayout') as NativeViewElementNode<View>;
         wrapper.setStyle("margin", 0);
         wrapper.setStyle("padding", 0);
         let componentInstance = new componentClass({
@@ -43,11 +40,11 @@ export default class RadListViewElement extends NativeElementNode {
 
     private updateListItem(args: ListViewEventData | SwipeActionsEventData) {
         let item;
-        let listView = this.nativeView as RadListView;
+        let listView = this.nativeView;
         let items = listView.items;
 
         if (args.index >= items.length) {
-            console.log("Got request for item at index that didn't exists", items, args.index)
+            logger.warn("Got request for item at index that didn't exist")
             return;
         }
 
@@ -65,14 +62,18 @@ export default class RadListViewElement extends NativeElementNode {
         }
 
         if (componentInstance) {
-            console.log("updating view for ", args.index, args.view)
+            logger.debug("updating view for " + args.index)
             componentInstance.$set({ item })
         } else {
-            console.log("Couldn't find component for ", args.eventName, args.index, Object.keys(args), args.view, args.data);
+            console.error("Couldn't find component for ", args.eventName, args.index, Object.keys(args), args.view, args.data);
         }
     }
 
     static register() {
+        registerElement('listViewLinearLayout', () => new NativeElementNode('listViewLinearLayout', ListViewLinearLayout));
+        registerElement('listViewGridLayout', () => new NativeElementNode('listViewGridLayout', ListViewGridLayout));
+        registerElement('listViewStaggeredLayout', () => new NativeElementNode('listViewStaggeredLayout', ListViewStaggeredLayout));
+
         registerElement('radlistview', () => new RadListViewElement());
     }
 }

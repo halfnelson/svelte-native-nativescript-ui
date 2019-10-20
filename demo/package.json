@@ -15,7 +15,7 @@
     "nativescript-theme-core": "~2.0.21",
     "nativescript-ui-listview": "^7.1.0",
     "nativescript-ui-sidedrawer": "^7.0.3",
-    "svelte-native": "~0.5.1",
+    "svelte-native": "file:../../svelte-native/dist",
     "svelte-native-nativescript-ui": "file:../dist",
     "tns-core-modules": "~6.1.1"
   },

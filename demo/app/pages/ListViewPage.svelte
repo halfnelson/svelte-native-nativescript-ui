@@ -1,5 +1,8 @@
 <page>
-    <actionBar title="RadListView" />
+    <actionBar title="RadListView" >
+        <actionItem icon="font://&#xf58e;" class="fas" on:tap={() => layoutType = "grid"} visibility="{layoutType == "linear" ? "visible" : "collapsed"}" ></actionItem>
+        <actionItem icon="font://&#xf00b;" class="fas" on:tap={() => layoutType = "linear"} visibility="{layoutType == "grid" ? "visible" : "collapsed"}" ></actionItem>
+    </actionBar>
     <radListView items={items} bind:this="{listView}"
             swipeActions="true" 
             pullToRefresh="true"
@@ -11,6 +14,14 @@
             on:loadMoreDataRequested="{onLoadMoreDataRequested}"
             on:itemSwipeProgressStarted="{onitemSwipeProgressStarted}">
 
+        <radListView.listViewLayout>
+            {#if layoutType == "grid"}
+                <listViewGridLayout />
+            {:else}
+                <listViewLinearLayout />
+            {/if}
+        </radListView.listViewLayout>
+        
         <Template type="{ListViewViewType.ItemView}" let:item>
             <gridLayout columns="auto,*" class="item-template">
                 <image src="{item.image}" class="far" />
@@ -79,21 +90,12 @@
         "font://\uf58B",
         "font://\uf58C"
     ]
-    
+    let layoutType = "linear";
     let listView;
 
     function generateItems(count, offset=0) {
         return (new Array(count).fill()).map((_, i) => ({ name: `Item ${i+offset}`, description: `Item ${i+offset} description`, image: images[(i+offset) % images.length]}))
     }
-
-    onMount(() => {
-        let layout = new ListViewLinearLayout();
-        layout.itemDeleteAnimation = ListViewItemAnimation.Fade;
-        layout.itemInsertAnimation = ListViewItemAnimation.Fade;
-        let gridLayout = new ListViewGridLayout();
-        listView.nativeView.listViewLayout = layout;
-    })
-
 
     let items = new ObservableArray(generateItems(50));
 

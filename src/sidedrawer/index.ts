@@ -1,12 +1,11 @@
 import { registerElement } from 'svelte-native/dom'
-import { NativeElementNode } from "svelte-native/dom";
+import { NativeViewElementNode } from "svelte-native/dom";
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 
 
-export default class RadSideDrawerElement extends NativeElementNode {
+export default class RadSideDrawerElement extends NativeViewElementNode<RadSideDrawer> {
     constructor() {
-        let RadSideDrawer = require('nativescript-ui-sidedrawer').RadSideDrawer;
-        super('radSideDrawer',  RadSideDrawer, null);
+        super('radSideDrawer',  RadSideDrawer);
     }
 
     private get _drawer() {
