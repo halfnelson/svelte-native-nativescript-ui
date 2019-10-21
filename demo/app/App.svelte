@@ -6,27 +6,27 @@
                 <label row="0" class="fas h2" text="&#xf00d;" padding="10" horizontalAlignment="right" on:tap={() => drawer.closeDrawer()} />
                 <scrollView row="1" >
                     <stackLayout>
-                        <label text="Primary" padding="10" />
+                        <label text="List View" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(ListViewPage);  }}" />
+                        <label text="Calendar" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(CalendarPage);  }}" />
                     </stackLayout>
                 </scrollView>
             </gridLayout>
         </radSideDrawer.drawerContent>
         <radSideDrawer.mainContent>
-            <frame id="navFrame">
-                <ListViewPage />
-           </frame>
+           <frame id="navframe" defaultPage={ListViewPage}></frame>
         </radSideDrawer.mainContent>
     </radSideDrawer>
 </page>
 
 <script>
-    import { onMount } from 'svelte'
+    import { onMount, tick } from 'svelte'
     import * as nav from './Nav'
-
     import ListViewPage from './pages/ListViewPage.svelte'
+    import CalendarPage from './pages/CalendarPage.svelte'
   
     let drawer;
-    nav.init("navFrame")
 
+    nav.init("navframe")
+  
 </script>
 

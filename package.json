@@ -40,5 +40,7 @@
     "nativescript-ui-sidedrawer": "^7.0.2",
     "nativescript-ui-listview": "7.0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "nativescript-ui-calendar": "^5.0.0"
+  }
 }
