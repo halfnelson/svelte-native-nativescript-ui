@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/halfnelson/svelte-native-nativescript-ui#readme",
   "peerDependencies": {
-    "svelte-native": "~0.5.1"
+    "svelte-native": "~0.6.0"
   },
   "scripts": {
     "clean": "npx rimraf ./dist/*",
@@ -38,9 +38,9 @@
     "rimraf": "^2.6.3",
     "svelte-native": "file:../svelte-native/dist",
     "nativescript-ui-sidedrawer": "^7.0.2",
-    "nativescript-ui-listview": "7.0.2"
+    "nativescript-ui-listview": "7.0.2",
+    "nativescript-ui-calendar": "^5.0.0",
+    "nativescript-ui-chart": "6.0.0"
   },
-  "dependencies": {
-    "nativescript-ui-calendar": "^5.0.0"
-  }
+  "dependencies": {}
 }

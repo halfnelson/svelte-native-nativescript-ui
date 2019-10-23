@@ -2,7 +2,6 @@ import { registerElement } from 'svelte-native/dom'
 import { NativeViewElementNode } from "svelte-native/dom";
 import { RadCalendar } from 'nativescript-ui-calendar';
 
-
 export default class RadCalendarElement extends NativeViewElementNode<RadCalendar> {
     constructor() {
         super('radCalendar',  RadCalendar);
