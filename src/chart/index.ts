@@ -14,52 +14,39 @@ import { RadPieChart, RadCartesianChart, PieSeries, DonutSeries,
 } from 'nativescript-ui-chart';
 
 import { ObservableArray } from 'tns-core-modules/data/observable-array';
+import { View } from 'tns-core-modules/ui/core/view';
 
-
-class PieChart extends NativeViewElementNode<RadPieChart> {
-    constructor() {
-        super('radPieChart', RadPieChart)
+function setOnArrayProp(parent: any, value: any,  propName: string) {
+    let current = parent[propName];
+    if (!(current instanceof ObservableArray)) {
+        parent[propName] = new ObservableArray(value);
+    } else {
+        current.push(value)
     }
 }
 
-class CartesianChart extends NativeViewElementNode<RadCartesianChart> {
-    constructor() {
-        super('radCartesianChart', RadCartesianChart)
+function removeFromArrayProp(parent: any, value: any,  propName: string) {
+    let current = parent[propName];
+    if ((current instanceof ObservableArray)) {
+        let idx = current.indexOf(value);
+        if (idx >= 0) current.splice(idx, 1);
+    }
+}
+
+
+class BaseChart<T extends View> extends NativeViewElementNode<T> {
+    constructor(tagName: string, viewClass: new () => T) {
+        super(tagName, viewClass)
     }
 
     onInsertedChild(childNode: ViewNode, index: number) {
         if (childNode instanceof NativeElementNode) {
-            if (childNode.propAttribute.toLocaleLowerCase() == "series") {
-                let currentSeries = this.nativeView.series;
-                if (!(currentSeries instanceof ObservableArray)) {
-                    this.nativeView.series = new ObservableArray(childNode.nativeElement);
-                } else {
-                    this.nativeView.series.push(childNode.nativeElement)
+            let propAttr = childNode.propAttribute.toLowerCase();
+            for (var arrayProp of ["series", "annotations", "palettes"]) {
+                if (propAttr == arrayProp) {
+                    setOnArrayProp(this.nativeElement, childNode.nativeElement, propAttr)
+                    return;
                 }
-                //short circuit any other processing
-                return;
-            }
-
-            if (childNode.propAttribute.toLocaleLowerCase() == "annotations") {
-                let current = this.nativeView.annotations;
-                if (!(current instanceof ObservableArray)) {
-                    this.nativeView.annotations = new ObservableArray(childNode.nativeElement);
-                } else {
-                    this.nativeView.annotations.push(childNode.nativeElement)
-                }
-                //short circuit any other processing
-                return;
-            }
-
-            if (childNode.propAttribute.toLocaleLowerCase() == "palettes") {
-                let current = this.nativeView.palettes;
-                if (!(current instanceof ObservableArray)) {
-                    this.nativeView.palettes = new ObservableArray(childNode.nativeElement);
-                } else {
-                    this.nativeView.palettes.push(childNode.nativeElement)
-                }
-                //short circuit any other processing
-                return;
             }
         }
         super.onInsertedChild(childNode, index);
@@ -67,37 +54,28 @@ class CartesianChart extends NativeViewElementNode<RadCartesianChart> {
     
     onRemovedChild(childNode: ViewNode) {
         if (childNode instanceof NativeElementNode) {
-            if (childNode.propAttribute.toLocaleLowerCase() == "series") {
-                let currentSeries = this.nativeView.series;
-                if ((currentSeries instanceof ObservableArray)) {
-                    let idx = currentSeries.indexOf(childNode.nativeElement);
-                    if (idx >= 0) currentSeries.splice(idx, 1);
+            let propAttr = childNode.propAttribute.toLowerCase();
+            for (var arrayProp of ["series", "annotations", "palettes"]) {
+                if (propAttr == arrayProp) {
+                    removeFromArrayProp(this.nativeElement, childNode.nativeElement, propAttr)
+                    return;
                 }
-                //short circuit any other processing
-                return;
-            }
-
-            if (childNode.propAttribute.toLocaleLowerCase() == "annotations") {
-                let current = this.nativeView.annotations;
-                if ((current instanceof ObservableArray)) {
-                    let idx = current.indexOf(childNode.nativeElement);
-                    if (idx >= 0) current.splice(idx, 1);
-                }
-                //short circuit any other processing
-                return;
-            }
-
-            if (childNode.propAttribute.toLocaleLowerCase() == "palettes") {
-                let current = this.nativeView.palettes;
-                if ((current instanceof ObservableArray)) {
-                    let idx = current.indexOf(childNode.nativeElement);
-                    if (idx >= 0) current.splice(idx, 1);
-                }
-                //short circuit any other processing
-                return;
             }
         }
         super.onRemovedChild(childNode);
+    }
+}
+
+
+class PieChart extends BaseChart<RadPieChart> {
+    constructor() {
+        super('radPieChart', RadPieChart)
+    }
+}
+
+class CartesianChart extends BaseChart<RadCartesianChart> {
+    constructor() {
+        super('radCartesianChart', RadCartesianChart)
     }
 }
 
@@ -108,14 +86,8 @@ class SNPalette extends NativeElementNode<Palette> {
 
     onInsertedChild(childNode: ViewNode, index: number) {
         if (childNode instanceof NativeElementNode) {
-            if (childNode.propAttribute.toLocaleLowerCase() == "entries") {
-                let current = this.nativeElement.entries;
-                if (!(current instanceof ObservableArray)) {
-                    this.nativeElement.entries = new ObservableArray(childNode.nativeElement);
-                } else {
-                    this.nativeElement.entries.push(childNode.nativeElement)
-                }
-                //short circuit any other processing
+            if (childNode.propAttribute.toLowerCase() == "entries") {
+                setOnArrayProp(this.nativeElement, childNode.nativeElement, "entries")
                 return;
             }
         }
@@ -124,13 +96,8 @@ class SNPalette extends NativeElementNode<Palette> {
     
     onRemovedChild(childNode: ViewNode) {
         if (childNode instanceof NativeElementNode) {
-            if (childNode.propAttribute.toLocaleLowerCase() == "entries") {
-                let current = this.nativeElement.entries;
-                if ((current instanceof ObservableArray)) {
-                    let idx = current.indexOf(childNode.nativeElement);
-                    if (idx >= 0) current.splice(idx, 1);
-                }
-                //short circuit any other processing
+            if (childNode.propAttribute.toLowerCase() == "entries") {
+                removeFromArrayProp(this.nativeElement, childNode.nativeElement, "entries")
                 return;
             }
         }

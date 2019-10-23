@@ -5,7 +5,7 @@ import pkg from './package.json'
 
 let externalModules = pkg.peerDependencies ? Object.keys(pkg.peerDependencies) : []
 
-let localModules = ["sidedrawer", "listview", "calendar"]
+let localModules = ["sidedrawer", "listview", "calendar", "chart"]
 
 let plugins = [
   resolve({
@@ -28,7 +28,7 @@ function module_defs() {
         file: `dist/${mod}/index.mjs`,
         format: 'esm'
       }],
-      external: (id) => externalModules.find(e => e == id) || id.startsWith('nativescript-ui') || id.startsWith('svelte-native/'),
+      external: (id) => externalModules.find(e => e == id || id.startsWith(e+'/') ) || id.startsWith('nativescript-ui'),
       plugins: plugins
     }
   })
