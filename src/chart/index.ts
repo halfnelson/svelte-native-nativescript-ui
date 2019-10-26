@@ -105,30 +105,49 @@ class SNPalette extends NativeElementNode<Palette> {
     }
 }
 
+class ChartSeries<T> extends NativeElementNode<T> {
+    constructor(tagName: string, elClass: new () => T) {
+        super(tagName, elClass)
+    }
+
+    // For some reason seriesName isn't defined as a "property" on series, so when we set the property, it is lowercase (due to svelte's forced downcasing)
+    // we intercept and fix the case here.
+    setAttribute(fullkey: string, value: any): void {
+        if (fullkey.toLowerCase() == "seriesname") {
+            fullkey = "seriesName";
+        }
+        super.setAttribute(fullkey, value);
+    }
+}
+
+
 export default class Charts {
     static register() {
 
         const registerAs = (tag: string, native: new () => any) => 
             registerElement(tag, () => new NativeElementNode(tag, native))
 
+        const registerSeries = (tag: string, native: new () => any) => 
+            registerElement(tag, () => new ChartSeries(tag, native))
+
         //chart types
         registerElement('radPieChart', () => new PieChart());
         registerElement('radCartesianChart', () => new CartesianChart());
  
         //series types
-        registerAs('pieSeries', PieSeries);
-        registerAs('donutSeries', DonutSeries);
-        registerAs('lineSeries', LineSeries)
-        registerAs('splineSeries', SplineSeries)
-        registerAs('splineAreaSeries', SplineAreaSeries)
-        registerAs('areaSeries', AreaSeries)
-        registerAs('barSeries', BarSeries)
-        registerAs('rangeBarSeries', RangeBarSeries)
-        registerAs('bubbleSeries', BubbleSeries)
-        registerAs('scatterBubbleSeries', ScatterBubbleSeries)
-        registerAs('scatterSeries', ScatterSeries)
-        registerAs('candlestickSeries', CandlestickSeries)
-        registerAs('OhlcSeries', OhlcSeries)
+        registerSeries('pieSeries', PieSeries);
+        registerSeries('donutSeries', DonutSeries);
+        registerSeries('lineSeries', LineSeries)
+        registerSeries('splineSeries', SplineSeries)
+        registerSeries('splineAreaSeries', SplineAreaSeries)
+        registerSeries('areaSeries', AreaSeries)
+        registerSeries('barSeries', BarSeries)
+        registerSeries('rangeBarSeries', RangeBarSeries)
+        registerSeries('bubbleSeries', BubbleSeries)
+        registerSeries('scatterBubbleSeries', ScatterBubbleSeries)
+        registerSeries('scatterSeries', ScatterSeries)
+        registerSeries('candlestickSeries', CandlestickSeries)
+        registerSeries('OhlcSeries', OhlcSeries)
 
         //axes types
         registerAs('categoricalAxis', CategoricalAxis)

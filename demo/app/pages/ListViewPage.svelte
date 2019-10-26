@@ -8,6 +8,8 @@
             pullToRefresh="true"
             itemReorder="true"
             loadOnDemandMode="{ListViewLoadOnDemandMode.Manual}"
+            itemTemplateSelector="{selectTemplate}"
+            groupingFunction="{groupSelector}"
             on:itemTap="{onItemTap}"
             on:itemReordered="{onItemReordered}"
             on:pullToRefreshInitiated="{onPullToRefreshInitiated}"
@@ -22,7 +24,7 @@
             {/if}
         </radListView.listViewLayout>
         
-        <Template type="{ListViewViewType.ItemView}" let:item>
+        <Template type="{ListViewViewType.ItemView}" key="even" let:item>
             <gridLayout columns="auto,*" class="item-template">
                 <image src="{item.image}" class="far" />
                 <stackLayout col="1" >
@@ -31,6 +33,29 @@
                 </stackLayout>
             </gridLayout>
         </Template>
+
+         <Template type="{ListViewViewType.ItemView}" key="odd" let:item>
+            <gridLayout columns="*, auto" class="item-template odd">
+                <stackLayout>
+                    <label style="font-size: 20">{item.name}</label>
+                    <label style="font-size: 10">{item.description}</label>
+                </stackLayout>
+                <image col="1" src="{item.image}" class="far" />
+            </gridLayout>
+        </Template>
+
+        <Template type="{ListViewViewType.HeaderView}" > 
+            <label class="h2">Emoji!</label>
+        </Template>
+
+        <Template type="{ListViewViewType.FooterView}" > 
+            <label class="h2">The End</label>
+        </Template>
+
+        <Template type="{ListViewViewType.GroupView}" let:item> 
+            <label class="h3 group">{item}</label>
+        </Template>
+
         <Template type="{ListViewViewType.ItemSwipeView}" let:item>
             <gridLayout columns="*,auto" backgroundColor="red">
                 <label id="delete-view" col="1"  on:tap="{() => doDelete(item)}" class="far" text="&#xf2ed;"  />
@@ -50,10 +75,14 @@
     .item-template {
         background-color: white;
     }
-
+    
     .item-template label {
         padding: 0;
         margin: 0;
+    }
+    .group {
+        font-weight: bold;
+        background-color: lightseagreen;
     }
 
     .item-template image {
@@ -94,9 +123,9 @@
     let listView;
 
     function generateItems(count, offset=0) {
-        return (new Array(count).fill()).map((_, i) => ({ name: `Item ${i+offset}`, description: `Item ${i+offset} description`, image: images[(i+offset) % images.length]}))
+        return (new Array(count).fill()).map((_, i) => ({ index: i, name: `Item ${i+offset}`, description: `Item ${i+offset} description`, image: images[(i+offset) % images.length]}))
     }
-
+    
     let items = new ObservableArray(generateItems(50));
 
     function doDelete(item) {
@@ -140,5 +169,13 @@
             }, 1500);
             args.returnValue = true;
         }
+    }
+
+    function selectTemplate(item, index, items) {
+        return  (index % 2 == 0) ? "even" : "odd";
+    }
+
+    function groupSelector(item) {
+        return item.index < 20 ? "Under 20" : "Over 20";
     }
 </script>
