@@ -9,6 +9,7 @@
                         <label text="List View" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(ListViewPage);  }}" />
                         <label text="Calendar" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(CalendarPage);  }}" />
                         <label text="Chart" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(ChartPage);  }}" />
+                        <label text="Data Form" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(DataFormPage);  }}" />
                     </stackLayout>
                 </scrollView>
             </gridLayout>
@@ -25,6 +26,7 @@
     import ListViewPage from './pages/ListViewPage.svelte'
     import CalendarPage from './pages/CalendarPage.svelte'
     import ChartPage from './pages/ChartPage.svelte'
+    import DataFormPage from './pages/DataFormPage.svelte'
   
     let drawer;
 

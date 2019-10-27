@@ -1,10 +1,10 @@
-import { registerElement, NativeElementNode } from 'svelte-native/dom'
+import { registerElement, NativeElementNode, NativeElementPropType, NativeElementPropConfig } from 'svelte-native/dom'
 import { NativeViewElementNode } from "svelte-native/dom";
 import { RadDataForm, DataFormStackLayout, DataFormGridLayout, EntityProperty, PropertyEditor, PropertyEditorParams, PropertyEditorStyle, PropertyGroup, EmailValidator, IsTrueValidator, NonEmptyValidator, MaximumLengthValidator, MinimumLengthValidator, PhoneValidator, RangeValidator, RegExValidator } from 'nativescript-ui-dataform';
 
 export default class RadDataFormElement extends NativeViewElementNode<RadDataForm> {
     constructor() {
-        super('radDataForm',  RadDataForm);
+        super('radDataForm',  RadDataForm, { "groups": NativeElementPropType.Array, "properties": NativeElementPropType.Array});
     }
 
     getPropertyByName(prop: string) {
@@ -22,16 +22,16 @@ export default class RadDataFormElement extends NativeViewElementNode<RadDataFor
 
     static register() {
 
-        const registerAs = (tag: string, native: new () => any) => 
-            registerElement(tag, () => new NativeElementNode(tag, native))
+        const registerAs = (tag: string, native: new () => any, propconfig: NativeElementPropConfig = {}) => 
+            registerElement(tag, () => new NativeElementNode(tag, native, propconfig))
             
         registerAs('DataFormStackLayout', DataFormStackLayout);
         registerAs('DataFormGridLayout', DataFormGridLayout);
-        registerAs('EntityProperty', EntityProperty);
+        registerAs('EntityProperty', EntityProperty, { "validators": NativeElementPropType.Array});
         registerAs('PropertyEditor', PropertyEditor);
         registerAs('PropertyEditorParams', PropertyEditorParams);
         registerAs('PropertyEditorStyle', PropertyEditorStyle);
-        registerAs('PropertyGroup', PropertyGroup);
+        registerAs('PropertyGroup', PropertyGroup, { "properties": NativeElementPropType.Array });
         registerAs('EmailValidator', EmailValidator);
         registerAs('IsTrueValidator', IsTrueValidator);
         registerAs('NonEmptyValidator', NonEmptyValidator);

@@ -17,6 +17,7 @@
     "nativescript-ui-sidedrawer": "^7.0.3",
     "nativescript-ui-calendar": "5.0.0",
     "nativescript-ui-chart": "6.0.0",
+    "nativescript-ui-dataform": "5.1.1",
     "svelte-native": "file:../../svelte-native/dist",
     "svelte-native-nativescript-ui": "file:../dist",
     "tns-core-modules": "~6.1.1"

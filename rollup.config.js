@@ -5,7 +5,7 @@ import pkg from './package.json'
 
 let externalModules = pkg.peerDependencies ? Object.keys(pkg.peerDependencies) : []
 
-let localModules = ["sidedrawer", "listview", "calendar", "chart"]
+let localModules = ["sidedrawer", "listview", "calendar", "chart", "dataform"]
 
 let plugins = [
   resolve({
