@@ -7,7 +7,7 @@
     {#if mode == "pie"}
     <gridLayout rows="*, *">
         <radPieChart id="pieChart" allowAnimation="true" row="0">
-            <pieSeries prop:series
+            <pieSeries
                 selectionMode="DataPoint"
                 expandRadius="0.4"
                 outerRadiusFactor="0.7"
@@ -15,10 +15,10 @@
                 legendLabel="Brand"
                 items="{ pieSource }">
             </pieSeries>
-            <radLegendView prop:legend position="Right" title="Brands" offsetOrigin="TopRight" width="110" enableSelection="true"/>
+            <radLegendView position="Right" title="Brands" offsetOrigin="TopRight" width="110" enableSelection="true"/>
         </radPieChart>
         <radPieChart id="pieChart" allowAnimation="true" row="1">
-            <donutSeries prop:series
+            <donutSeries 
                 selectionMode="DataPoint"
                 expandRadius="0.4"
                 outerRadiusFactor="0.7"
@@ -27,15 +27,15 @@
                 legendLabel="Brand"
                 items="{ pieSource }">
             </donutSeries>
-            <radLegendView prop:legend position="Right" title="Brands" offsetOrigin="TopRight" width="110" enableSelection="true"/>
+            <radLegendView position="Right" title="Brands" offsetOrigin="TopRight" width="110" enableSelection="true"/>
         </radPieChart>
     </gridLayout>
     {:else}
         <radCartesianChart margin="20">
             <categoricalAxis prop:horizontalAxis />
             <linearAxis prop:verticalAxis />
-            <barSeries prop:series  paletteMode="Item" items="{ categoricalSource }" categoryProperty="Country" valueProperty="Amount" seriesName="countries" />
-            <palette prop:palettes seriesName="countries">
+            <barSeries paletteMode="Item" items="{ categoricalSource }" categoryProperty="Country" valueProperty="Amount" seriesName="countries" />
+            <palette seriesName="countries">
                 <paletteEntry prop:entries fillColor="#ee4035" strokeColor="#ee4035"/>
                 <paletteEntry prop:entries fillColor="#f37736" strokeColor="#f37736"/>
                 <paletteEntry prop:entries fillColor="#fdf498" strokeColor="#fdf498"/>

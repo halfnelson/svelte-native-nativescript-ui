@@ -1,39 +1,38 @@
 <page>
     <actionBar title="RadDataForm Markup" />
     <radDataForm source={ticket} metadata={ticketMetadata}>
-        <entityProperty prop:properties name="movie" displayName="Movie Name" index="0" converter={movieConverter}
+        <entityProperty name="movie" displayName="Movie Name" index="0" converter={movieConverter}
             valuesProvider={movieNames}>
-            <propertyEditor prop:editor type="Picker" />
+            <propertyEditor type="Picker" />
         </entityProperty>
-        <entityProperty prop:properties name="date" index="1">
-            <propertyEditor prop:editor type="DatePicker" />
+        <entityProperty name="date" index="1">
+            <propertyEditor type="DatePicker" />
         </entityProperty>
-
-        <entityProperty prop:properties name="time" index="2">
-            <propertyEditor prop:editor type="TimePicker" />
+        <entityProperty name="time" index="2">
+            <propertyEditor type="TimePicker" />
         </entityProperty>
-        <entityProperty prop:properties name="type" displayName="Type" index="3" valuesProvider="2D, 3D">
-            <propertyEditor prop:editor type="SegmentedEditor" />
+        <entityProperty name="type" displayName="Type" index="3" valuesProvider="2D, 3D">
+            <propertyEditor type="SegmentedEditor" />
         </entityProperty>
-        <entityProperty prop:properties name="price" index="4" readOnly="true">
-            <propertyEditor prop:editor type="Decimal" />
+        <entityProperty name="price" index="4" readOnly="true">
+            <propertyEditor type="Decimal" />
         </entityProperty>
-        <entityProperty prop:properties name="numberOfTickets" displayName="Number of Tickets" index="5">
-            <propertyEditor prop:editor type="Stepper">
-                <propertyEditorParams prop:params minimum="0" maximum="100" step="2" />
+        <entityProperty name="numberOfTickets" displayName="Number of Tickets" index="5">
+            <propertyEditor type="Stepper">
+                <propertyEditorParams minimum="0" maximum="100" step="2" />
             </propertyEditor>
         </entityProperty>
-        <entityProperty prop:properties name="contactName" displayName="Contact Name" index="6">
-            <propertyEditor prop:editor type="Text" />
+        <entityProperty name="contactName" displayName="Contact Name" index="6">
+            <propertyEditor type="Text" />
         </entityProperty>
-        <entityProperty prop:properties name="contactPhone" displayName="Contact Phone" index="7">
-            <propertyEditor prop:editor type="Phone" />
+        <entityProperty name="contactPhone" displayName="Contact Phone" index="7">
+            <propertyEditor type="Phone" />
         </entityProperty>
-        <entityProperty prop:properties name="contactEmail" displayName="Contact Email" index="8">
-            <propertyEditor prop:editor type="Email" />
+        <entityProperty name="contactEmail" displayName="Contact Email" index="8">
+            <propertyEditor type="Email" />
         </entityProperty>
-        <entityProperty prop:properties name="agreeTerms" displayName="I Agree with Terms" index="9">
-            <propertyEditor prop:editor type="Switch" />
+        <entityProperty name="agreeTerms" displayName="I Agree with Terms" index="9">
+            <propertyEditor type="Switch" />
         </entityProperty>
     </radDataForm>
 </page>

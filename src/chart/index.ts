@@ -15,35 +15,35 @@ import { RadPieChart, RadCartesianChart, PieSeries, DonutSeries,
 
 import { View } from 'tns-core-modules/ui/core/view';
 
-class BaseChart<T extends View> extends NativeViewElementNode<T> {
+class BaseChartElement<T extends View> extends NativeViewElementNode<T> {
     constructor(tagName: string, viewClass: new () => T) {
-        super(tagName, viewClass, { "series": PropType.ObservableArray, 
+        super(tagName, viewClass, null, { "series": PropType.ObservableArray, 
                                     "annotations": PropType.ObservableArray, 
                                     "palettes": PropType.ObservableArray});
     }
 }
 
-class PieChart extends BaseChart<RadPieChart> {
+class PieChartElement extends BaseChartElement<RadPieChart> {
     constructor() {
         super('radPieChart', RadPieChart)
     }
 }
 
-class CartesianChart extends BaseChart<RadCartesianChart> {
+class CartesianChartElement extends BaseChartElement<RadCartesianChart> {
     constructor() {
         super('radCartesianChart', RadCartesianChart)
     }
 }
 
-class SNPalette extends NativeElementNode<Palette> {
+class PaletteElement extends NativeElementNode<Palette> {
     constructor() {
-        super('pallete', Palette, { "entries": PropType.ObservableArray })
+        super('pallete', Palette, "palettes", { "entries": PropType.ObservableArray })
     }
 }
 
-class ChartSeries<T> extends NativeElementNode<T> {
+class ChartSeriesElement<T> extends NativeElementNode<T> {
     constructor(tagName: string, elClass: new () => T) {
-        super(tagName, elClass, { "seriesName": PropType.Value })
+        super(tagName, elClass, "series", { "seriesName": PropType.Value })
     }
 }
 
@@ -51,15 +51,15 @@ class ChartSeries<T> extends NativeElementNode<T> {
 export default class Charts {
     static register() {
 
-        const registerAs = (tag: string, native: new () => any) => 
-            registerElement(tag, () => new NativeElementNode(tag, native))
+        const registerAs = (tag: string, native: new () => any, parentProp: string = null) => 
+            registerElement(tag, () => new NativeElementNode(tag, native, parentProp))
 
         const registerSeries = (tag: string, native: new () => any) => 
-            registerElement(tag, () => new ChartSeries(tag, native))
+            registerElement(tag, () => new ChartSeriesElement(tag, native))
 
         //chart types
-        registerElement('radPieChart', () => new PieChart());
-        registerElement('radCartesianChart', () => new CartesianChart());
+        registerElement('radPieChart', () => new PieChartElement());
+        registerElement('radCartesianChart', () => new CartesianChartElement());
  
         //series types
         registerSeries('pieSeries', PieSeries);
@@ -84,20 +84,20 @@ export default class Charts {
         registerAs('logarithmicAxis', LogarithmicAxis)
 
         //grid
-        registerAs('radCartesianChartGrid', RadCartesianChartGrid)
+        registerAs('radCartesianChartGrid', RadCartesianChartGrid, "grid")
 
         //legend
-        registerAs('radLegendView', RadLegendView)
+        registerAs('radLegendView', RadLegendView, "legend")
 
         //palette
-        registerAs('paletteEntry', PaletteEntry)
-        registerElement('palette', () => new SNPalette())
+        registerAs('paletteEntry', PaletteEntry, "entries")
+        registerElement('palette', () => new PaletteElement())
 
         //Trackball
-        registerAs('trackball', Trackball)
+        registerAs('trackball', Trackball, "trackball")
 
         //Annotations
-        registerAs('chartGridLineAnnotation', ChartGridLineAnnotation)
-        registerAs('chartPlotBandAnnotation', ChartPlotBandAnnotation)
+        registerAs('chartGridLineAnnotation', ChartGridLineAnnotation, "annotations")
+        registerAs('chartPlotBandAnnotation', ChartPlotBandAnnotation, "annotations")
     }
 }

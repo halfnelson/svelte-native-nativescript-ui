@@ -4,7 +4,7 @@ import { RadDataForm, DataFormStackLayout, DataFormGridLayout, EntityProperty, P
 
 export default class RadDataFormElement extends NativeViewElementNode<RadDataForm> {
     constructor() {
-        super('radDataForm',  RadDataForm, { "groups": NativeElementPropType.Array, "properties": NativeElementPropType.Array});
+        super('radDataForm',  RadDataForm, null, { "groups": NativeElementPropType.Array, "properties": NativeElementPropType.Array});
     }
 
     getPropertyByName(prop: string) {
@@ -22,24 +22,24 @@ export default class RadDataFormElement extends NativeViewElementNode<RadDataFor
 
     static register() {
 
-        const registerAs = (tag: string, native: new () => any, propconfig: NativeElementPropConfig = {}) => 
-            registerElement(tag, () => new NativeElementNode(tag, native, propconfig))
+        const registerAs = (tag: string, native: new () => any, setsParentProp: string = null, propconfig: NativeElementPropConfig = {}) => 
+            registerElement(tag, () => new NativeElementNode(tag, native, setsParentProp, propconfig))
             
-        registerAs('DataFormStackLayout', DataFormStackLayout);
-        registerAs('DataFormGridLayout', DataFormGridLayout);
-        registerAs('EntityProperty', EntityProperty, { "validators": NativeElementPropType.Array});
-        registerAs('PropertyEditor', PropertyEditor);
-        registerAs('PropertyEditorParams', PropertyEditorParams);
-        registerAs('PropertyEditorStyle', PropertyEditorStyle);
-        registerAs('PropertyGroup', PropertyGroup, { "properties": NativeElementPropType.Array });
-        registerAs('EmailValidator', EmailValidator);
-        registerAs('IsTrueValidator', IsTrueValidator);
-        registerAs('NonEmptyValidator', NonEmptyValidator);
-        registerAs('MaximumLengthValidator', MaximumLengthValidator);
-        registerAs('MinimumLengthValidator', MinimumLengthValidator);
-        registerAs('PhoneValidator', PhoneValidator);
-        registerAs('RangeValidator', RangeValidator);
-        registerAs('RegExValidator', RegExValidator);
+        registerAs('DataFormStackLayout', DataFormStackLayout, "layout");
+        registerAs('DataFormGridLayout', DataFormGridLayout, "layout");
+        registerAs('EntityProperty', EntityProperty, "properties", { "validators": NativeElementPropType.Array});
+        registerAs('PropertyEditor', PropertyEditor, "editor");
+        registerAs('PropertyEditorParams', PropertyEditorParams, "params");
+        registerAs('PropertyEditorStyle', PropertyEditorStyle, "propertyEditorStyle");
+        registerAs('PropertyGroup', PropertyGroup, "groups", { "properties": NativeElementPropType.Array });
+        registerAs('EmailValidator', EmailValidator, "validators");
+        registerAs('IsTrueValidator', IsTrueValidator, "validators");
+        registerAs('NonEmptyValidator', NonEmptyValidator, "validators");
+        registerAs('MaximumLengthValidator', MaximumLengthValidator, "validators");
+        registerAs('MinimumLengthValidator', MinimumLengthValidator, "validators");
+        registerAs('PhoneValidator', PhoneValidator, "validators");
+        registerAs('RangeValidator', RangeValidator, "validators");
+        registerAs('RegExValidator', RegExValidator, "validators");
 
         registerElement('radDataForm', () => new RadDataFormElement());
     }
