@@ -6,12 +6,15 @@ import RadSideDrawerElement from "svelte-native-nativescript-ui/sidedrawer"
 import RadCalendarElement from "svelte-native-nativescript-ui/calendar"
 import Charts from "svelte-native-nativescript-ui/chart"
 import RadDataFrom from "svelte-native-nativescript-ui/dataform"
+import Gauges from "svelte-native-nativescript-ui/gauge"
 
 RadListViewElement.register();
 RadSideDrawerElement.register();
 RadCalendarElement.register();
 Charts.register();
 RadDataFrom.register();
+Gauges.register();
+
 //import * as trace from "tns-core-modules/trace"
 //trace.enable();
 //trace.addCategories(DomTraceCategory);
