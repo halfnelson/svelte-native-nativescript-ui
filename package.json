@@ -34,6 +34,7 @@
     "nativescript-ui-chart": "6.0.0",
     "nativescript-ui-listview": "7.0.2",
     "nativescript-ui-sidedrawer": "^7.0.2",
+    "nativescript-ui-dataform": "5.1.1",
     "rimraf": "^2.6.3",
     "rollup": "^1.20.3",
     "rollup-plugin-commonjs": "^10.1.0",
