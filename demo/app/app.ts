@@ -1,5 +1,5 @@
 
-import { svelteNative, DomTraceCategory } from "svelte-native";
+import { svelteNativeNoFrame, DomTraceCategory } from "svelte-native";
 
 import RadListViewElement from "svelte-native-nativescript-ui/listview"
 import RadSideDrawerElement from "svelte-native-nativescript-ui/sidedrawer"
@@ -22,4 +22,4 @@ AutoCompleteElement.register();
 //trace.addCategories(DomTraceCategory);
 
 import App from  "./App.svelte";
-svelteNative(App, {});
+svelteNativeNoFrame(App, {});

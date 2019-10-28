@@ -1,4 +1,4 @@
-import { registerElement, NativeElementNode } from 'svelte-native/dom'
+import { registerElement, registerNativeConfigElement,  NativeElementNode } from 'svelte-native/dom'
 import { NativeViewElementNode, NativeElementPropType as PropType } from "svelte-native/dom";
 import { RadPieChart, RadCartesianChart, PieSeries, DonutSeries, 
          LineSeries, SplineSeries, SplineAreaSeries, 
@@ -51,8 +51,8 @@ class ChartSeriesElement<T> extends NativeElementNode<T> {
 export default class Charts {
     static register() {
 
-        const registerAs = (tag: string, native: new () => any, parentProp: string = null) => 
-            registerElement(tag, () => new NativeElementNode(tag, native, parentProp))
+        const registerConfigElement = (tag: string, native: new () => any, parentProp: string = null) => 
+            registerNativeConfigElement(tag, () => native, parentProp)
 
         const registerSeries = (tag: string, native: new () => any) => 
             registerElement(tag, () => new ChartSeriesElement(tag, native))
@@ -77,27 +77,27 @@ export default class Charts {
         registerSeries('OhlcSeries', OhlcSeries)
 
         //axes types
-        registerAs('categoricalAxis', CategoricalAxis)
-        registerAs('dateTimeCategoricalAxis', DateTimeCategoricalAxis)
-        registerAs('dateTimeContinuousAxis', DateTimeContinuousAxis)
-        registerAs('linearAxis', LinearAxis)
-        registerAs('logarithmicAxis', LogarithmicAxis)
+        registerConfigElement('categoricalAxis', CategoricalAxis)
+        registerConfigElement('dateTimeCategoricalAxis', DateTimeCategoricalAxis)
+        registerConfigElement('dateTimeContinuousAxis', DateTimeContinuousAxis)
+        registerConfigElement('linearAxis', LinearAxis)
+        registerConfigElement('logarithmicAxis', LogarithmicAxis)
 
         //grid
-        registerAs('radCartesianChartGrid', RadCartesianChartGrid, "grid")
+        registerConfigElement('radCartesianChartGrid', RadCartesianChartGrid, "grid")
 
         //legend
-        registerAs('radLegendView', RadLegendView, "legend")
+        registerConfigElement('radLegendView', RadLegendView, "legend")
 
         //palette
-        registerAs('paletteEntry', PaletteEntry, "entries")
+        registerConfigElement('paletteEntry', PaletteEntry, "entries")
         registerElement('palette', () => new PaletteElement())
 
         //Trackball
-        registerAs('trackball', Trackball, "trackball")
+        registerConfigElement('trackball', Trackball, "trackball")
 
         //Annotations
-        registerAs('chartGridLineAnnotation', ChartGridLineAnnotation, "annotations")
-        registerAs('chartPlotBandAnnotation', ChartPlotBandAnnotation, "annotations")
+        registerConfigElement('chartGridLineAnnotation', ChartGridLineAnnotation, "annotations")
+        registerConfigElement('chartPlotBandAnnotation', ChartPlotBandAnnotation, "annotations")
     }
 }
