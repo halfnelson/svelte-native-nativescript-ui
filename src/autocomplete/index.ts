@@ -1,4 +1,4 @@
-import { registerElement, NativeElementNode, NativeElementPropType, TemplateElement, logger, createElement } from 'svelte-native/dom'
+import { registerElement, NativeElementNode, NativeElementPropType as PropType, TemplateElement, logger, createElement } from 'svelte-native/dom'
 import { NativeViewElementNode } from "svelte-native/dom";
 import { RadAutoCompleteTextView, TokenModel, SuggestionView, AutoCompleteViewType } from 'nativescript-ui-autocomplete';
 import { View } from 'tns-core-modules/ui/core/view';
@@ -8,7 +8,7 @@ import { ItemEventData } from 'tns-core-modules/ui/list-view'
 class SuggestionViewElement extends NativeElementNode<SuggestionView> {
     _templateComponent: TemplateElement = null
     constructor() {
-        super('suggestionView',  SuggestionView, "suggestionView", {"suggestionItemTemplate": NativeElementPropType.Value, "suggestionViewHeight": NativeElementPropType.Value});
+        super('suggestionView',  SuggestionView, "suggestionView", {"suggestionItemTemplate": PropType.Value, "suggestionViewHeight": PropType.Value});
     }
 
     get itemTemplateComponent() {
@@ -27,7 +27,25 @@ type AutocompleteItemEventData = ItemEventData & { data: any }
 
 export default class RadAutoCompleteTextViewElement extends NativeViewElementNode<RadAutoCompleteTextView> {
     constructor() {
-        super('radAutoCompleteTextView',  RadAutoCompleteTextView);
+        super('radAutoCompleteTextView',  RadAutoCompleteTextView, null, {
+            "closeButtonImageSrc": PropType.Value,
+            "completionMode": PropType.Value,
+            "displayMode": PropType.Value,
+            "filteredItems": PropType.Value,
+            "itemViewLoader": PropType.Value,
+            "layoutMode": PropType.Value,
+            "loadSuggestionsAsync": PropType.Value,
+            "minimumCharactersToSearch": PropType.Value,
+            "noResultsText": PropType.Value,
+            "readOnly": PropType.Value,
+            "selectedTokens": PropType.Value,
+            "showCloseButton": PropType.Value,
+            "suggestMode": PropType.Value,
+            "suggestionView": PropType.Value,
+            "text": PropType.Value,
+            "items": PropType.Value,
+            "hint": PropType.Value
+        });
         this.nativeElement.itemViewLoader = (viewType: string) => this.loadView(viewType)
         this.nativeView.on(RadAutoCompleteTextView.itemLoadingEvent, (args) => { this.updateListItem(args as AutocompleteItemEventData) });
 
@@ -38,9 +56,9 @@ export default class RadAutoCompleteTextViewElement extends NativeViewElementNod
             return null;
         
         let suggestionView = this.nativeView.suggestionView
-        if (!suggestionView || !suggestionView.__SvelteComponent__) return;
+        if (!suggestionView || !suggestionView.__SvelteNativeElement__) return;
 
-        let componentClass = (suggestionView.__SvelteComponent__ as SuggestionViewElement).itemTemplateComponent;
+        let componentClass = (suggestionView.__SvelteNativeElement__ as SuggestionViewElement).itemTemplateComponent;
         if (!componentClass) return null;
 
         logger.debug("creating view for " + viewType);
