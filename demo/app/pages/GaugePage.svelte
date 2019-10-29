@@ -1,5 +1,5 @@
 <page>
-    <actionBar title="RadGauge"/>
+    <Header title="RadGauge"/>
      <radRadialGauge> 
             <radialScale minimum="0" maximum="6" radius="0.90">
                    <scaleStyle majorTicksCount="7" minorTicksCount="9" lineThickness="0" labelsCount="7" ticksOffset="0"/>
@@ -22,3 +22,7 @@
             </radialScale>
     </radRadialGauge>
 </page>
+
+<script>
+    import Header from '../Header.svelte'
+</script>

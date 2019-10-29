@@ -5,12 +5,12 @@
             <label row="0" class="fas h2" text="&#xf00d;" padding="10" horizontalAlignment="right" on:tap={() => drawer.closeDrawer()} />
             <scrollView row="1" >
                 <stackLayout>
-                    <label text="List View" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(ListViewPage);  }}" />
-                    <label text="Calendar" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(CalendarPage);  }}" />
-                    <label text="Chart" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(ChartPage);  }}" />
-                    <label text="Data Form" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(DataFormPage);  }}" />
-                    <label text="GaugePage" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(GaugePage);  }}" />
-                    <label text="AutoCompletePage" padding="10" on:tap="{() => {drawer.closeDrawer(); nav.goto(AutoCompletePage);  }}" />
+                    <label text="List View" class:current={$current_page == ListViewPage} padding="10" on:tap="{() => gotoPage(ListViewPage)}" />
+                    <label text="Calendar" class:current={$current_page == CalendarPage} padding="10" on:tap="{() => gotoPage(CalendarPage)}" />
+                    <label text="Chart" class:current={$current_page == ChartPage} padding="10" on:tap="{() => gotoPage(ChartPage)}" />
+                    <label text="Data Form" class:current={$current_page == DataFormPage} padding="10" on:tap="{() => gotoPage(DataFormPage)}" />
+                    <label text="GaugePage" class:current={$current_page == GaugePage} padding="10" on:tap="{() => gotoPage(GaugePage)}" />
+                    <label text="AutoCompletePage" class:current={$current_page == AutoCompletePage} padding="10" on:tap="{() => gotoPage(AutoCompletePage)}" />
                 </stackLayout>
             </scrollView>
         </gridLayout>
@@ -21,7 +21,7 @@
 </radSideDrawer>
 
 <script>
-    import { onMount, tick } from 'svelte'
+    import { onMount } from 'svelte'
     import * as nav from './Nav'
     import ListViewPage from './pages/ListViewPage.svelte'
     import CalendarPage from './pages/CalendarPage.svelte'
@@ -30,7 +30,22 @@
     import GaugePage from './pages/GaugePage.svelte'
     import AutoCompletePage from './pages/AutoCompletePage.svelte'
 
+    function gotoPage(page) {
+        drawer.closeDrawer();
+        nav.goto(page);
+    }
+    
     let drawer;
-    nav.init("navframe")
-  
+    let current_page = nav.current_page
+
+    onMount(() => {
+        nav.init("navframe", drawer, ListViewPage)
+    })
+
 </script>
+
+<style>
+    .current {
+        font-weight: bold;
+    }
+</style>

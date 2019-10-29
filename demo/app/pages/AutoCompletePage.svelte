@@ -1,5 +1,5 @@
 <page>
-    <actionBar title="RadAutoComplete" />
+    <Header title="RadAutoComplete" />
     <stackLayout>
     <label text="Artist:" class="label" margin="20 10"/>
     <radAutoCompleteTextView items="{ items }" suggestMode="{ AutoCompleteSuggestMode.SuggestAppend }" displayMode="{AutoCompleteDisplayMode.Tokens}" completionMode="Contains">
@@ -16,6 +16,7 @@
 </page>
 
 <script>
+    import Header from '../Header.svelte'
     import { Template } from 'svelte-native/components'
     import { ObservableArray } from 'tns-core-modules/data/observable-array'
     import { TokenModel, AutoCompleteSuggestMode, AutoCompleteDisplayMode } from "nativescript-ui-autocomplete"

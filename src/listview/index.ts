@@ -106,9 +106,9 @@ export default class RadListViewElement extends NativeViewElementNode<RadListVie
         if (items.getItem) {
             item = items.getItem(args.index);
         } else {
-            item = items.items[args.index]
+            item = items[args.index]
         }
-
+       // logger.debug(`updating with swiped item  idx: ${args.index} ${args.swipeView.bindingContext}`)
         this.updateViewWithProps(args.swipeView, { item });
     }
 

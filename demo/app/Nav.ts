@@ -1,19 +1,20 @@
 import { navigate } from 'svelte-native'
+import { writable } from 'svelte/store'
+import RadSideDrawerElement from 'svelte-native-nativescript-ui/sidedrawer';
 
-let current_page
+export let current_page = writable(null);
 let nav_frame;
+let drawer: RadSideDrawerElement;
 
-export function init(navFrame) {
+export function init(navFrame, navDrawer: RadSideDrawerElement, startPage) {
     console.log("Setting nav frame:"+navFrame)
     nav_frame = navFrame;    
-}
-
-export function is_current(nav_frame) {
-    return nav_frame == current_page
+    drawer = navDrawer;
+    current_page.set(startPage)
 }
 
 export function goto(view, props)  {
-    current_page = view;
+    current_page.set(view);
     navigate({
        page: view,
        props: props,
@@ -22,4 +23,7 @@ export function goto(view, props)  {
     });
 }
 
+export function toggleDrawer() {
+    drawer.toggleDrawerState();
+}
 

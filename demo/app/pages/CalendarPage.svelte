@@ -1,19 +1,23 @@
 <page>
-    <actionBar title="RadCalendar">
-        <actionItem icon="font://&#xf133;" class="fas" on:tap={() => current_view_mode = CalendarViewMode.Year } visibility="{visibleIf(current_view_mode == CalendarViewMode.Month)}" />
-        <actionItem icon="font://&#xf783;" class="fas" on:tap={() => current_view_mode = CalendarViewMode.Day } visibility="{visibleIf(current_view_mode == CalendarViewMode.Year)}" />
-        <actionItem icon="font://&#xf784;" class="fas" on:tap={() => current_view_mode = CalendarViewMode.Week } visibility="{visibleIf(current_view_mode == CalendarViewMode.Day)}" />
-        <actionItem icon="font://&#xf073;" class="fas" on:tap={() => current_view_mode = CalendarViewMode.Month } visibility="{visibleIf(current_view_mode == CalendarViewMode.Week)}" />
-    </actionBar>
+    <Header title="RadCalendar">
+        {#if current_view_mode == CalendarViewMode.Month}
+            <actionItem icon="font://&#xf133;" class="fas" on:tap={() => current_view_mode = CalendarViewMode.Year } />
+        {:else if current_view_mode == CalendarViewMode.Year}
+            <actionItem icon="font://&#xf783;" class="fas" on:tap={() => current_view_mode = CalendarViewMode.Day }  />
+        {:else if current_view_mode == CalendarViewMode.Day}
+            <actionItem icon="font://&#xf784;" class="fas" on:tap={() => current_view_mode = CalendarViewMode.Week } />
+        {:else if current_view_mode == CalendarViewMode.Week}
+            <actionItem icon="font://&#xf073;" class="fas" on:tap={() => current_view_mode = CalendarViewMode.Month } />
+        {/if}
+    </Header>
 
     <radCalendar eventSource={events} eventsViewMode="Popover" viewMode={current_view_mode}  ></radCalendar>
 </page>
 
 <script>
+    import Header from '../Header.svelte'
     import { CalendarEvent, CalendarViewMode } from "nativescript-ui-calendar"
     let current_view_mode = CalendarViewMode.Month;
-    const visibleIf = l => l ? "visible" : "collapsed"
-    
 
 
 //thanks to https://www.nativescript.org/blog/a-deep-dive-into-telerik-ui-for-nativescripts-calendar

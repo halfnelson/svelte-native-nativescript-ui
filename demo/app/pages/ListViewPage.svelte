@@ -1,15 +1,18 @@
 <page>
-    <actionBar title="RadListView" >
-        <actionItem icon="font://&#xf58e;" class="fas" on:tap={() => layoutType = "grid"} visibility="{layoutType == "linear" ? "visible" : "collapsed"}" ></actionItem>
-        <actionItem icon="font://&#xf00b;" class="fas" on:tap={() => layoutType = "linear"} visibility="{layoutType == "grid" ? "visible" : "collapsed"}" ></actionItem>
-    </actionBar>
+    <Header title="RadListView" >
+        {#if layoutType == "linear"}
+            <actionItem icon="font://&#xf58e;" class="fas" on:tap={() => layoutType = "grid"}></actionItem>
+        {:else if layoutType == "grid"}
+            <actionItem icon="font://&#xf00b;" class="fas" on:tap={() => layoutType = "linear"}></actionItem>
+        {/if}
+    </Header>
     <radListView items={items} bind:this="{listView}"
             swipeActions="true" 
             pullToRefresh="true"
             itemReorder="true"
             loadOnDemandMode="{ListViewLoadOnDemandMode.Manual}"
             itemTemplateSelector="{selectTemplate}"
-            groupingFunction="{groupSelector}"
+       
             on:itemTap="{onItemTap}"
             on:itemReordered="{onItemReordered}"
             on:pullToRefreshInitiated="{onPullToRefreshInitiated}"
@@ -45,20 +48,20 @@
         </Template>
 
         <Template type="{ListViewViewType.HeaderView}" > 
-            <label class="h2">Emoji!</label>
+            <label class="header">This is a Header</label>
         </Template>
 
         <Template type="{ListViewViewType.FooterView}" > 
-            <label class="h2">The End</label>
+            <label class="footer">This is a Footer</label>
         </Template>
 
         <Template type="{ListViewViewType.GroupView}" let:item> 
-            <label class="h3 group">{item}</label>
+            <label class="group">{item}</label>
         </Template>
 
         <Template type="{ListViewViewType.ItemSwipeView}" let:item>
             <gridLayout columns="*,auto" backgroundColor="red">
-                <label id="delete-view" col="1"  on:tap="{() => doDelete(item)}" class="far" text="&#xf2ed;"  />
+                <label id="delete-view" col="1"  on:tap="{(e) => doDelete(e, item)}" class="far" text="&#xf2ed;"  />
             </gridLayout>
         </Template>
     </radListView>
@@ -80,9 +83,29 @@
         padding: 0;
         margin: 0;
     }
+
     .group {
         font-weight: bold;
-        background-color: lightseagreen;
+        background-color: seagreen;
+        color: white;
+        font-size: 18;
+        margin: 0;
+        padding: 10;
+    }
+
+    .header {
+        font-weight: bold;
+        font-size: 18;
+        color: seagreen;
+        padding: 15;
+        text-align: center;
+    }
+
+    .footer {
+        font-size: 12;
+        background-color: seagreen;
+        color: white;
+        text-align: center;   
     }
 
     .item-template image {
@@ -94,7 +117,7 @@
 </style>
 
 <script>
-
+    import Header from '../Header.svelte'
     import { onMount } from 'svelte'
     import { Template } from 'svelte-native/components'
     import { ObservableArray } from 'tns-core-modules/data/observable-array'

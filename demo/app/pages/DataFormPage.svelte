@@ -1,5 +1,5 @@
 <page>
-    <actionBar title="RadDataForm Markup" />
+    <Header title="RadDataForm" />
     <radDataForm source={ticket} metadata={ticketMetadata}>
         <entityProperty name="movie" displayName="Movie Name" index="0" converter={movieConverter}
             valuesProvider={movieNames}>
@@ -38,6 +38,8 @@
 </page>
 
 <script>
+
+    import Header from '../Header.svelte'
 
     let ticketMetadata = {
         'isReadOnly': false,

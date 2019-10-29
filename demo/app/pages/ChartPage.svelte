@@ -1,9 +1,11 @@
 <page>
-    <actionBar title="RadChart">
-        <actionItem icon="font://&#xf200;" class="fas" on:tap={() => mode = "pie" } visibility="{visibleIf(mode == "cartesian")}" />
-        <actionItem icon="font://&#xf080;" class="far" on:tap={() => mode = "cartesian" } visibility="{visibleIf(mode == "pie")}" />
-      />
-    </actionBar>
+    <Header title="RadChart">
+      {#if mode == "cartesian"}
+        <actionItem icon="font://&#xf200;" class="fas" on:tap={() => mode = "pie" } />
+      {:else}
+        <actionItem icon="font://&#xf080;" class="far" on:tap={() => mode = "cartesian" } />
+      {/if}
+    </Header>
     {#if mode == "pie"}
     <gridLayout rows="*, *">
         <radPieChart id="pieChart" allowAnimation="true" row="0">
@@ -47,7 +49,8 @@
 </page>
 
 <script>
-const visibleIf = l => l ? "visible" : "collapsed"
+
+import Header from '../Header.svelte'
 
 let mode = "pie"
 
