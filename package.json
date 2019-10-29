@@ -1,6 +1,6 @@
 {
   "name": "svelte-native-nativescript-ui",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Svelte Native support for Nativescript UI",
   "repository": {
     "type": "git",
@@ -12,6 +12,7 @@
     "nativescript-ui",
     "svelte-native"
   ],
+  "private": true,
   "author": "David Pershouse",
   "license": "MIT",
   "bugs": {
@@ -26,7 +27,7 @@
     "clean": "npx rimraf ./dist/*",
     "build": "npm run clean && rollup -c && node ./scripts/create-pkg.js",
     "watch": "rollup -cw",
-    "deploy": "npm run build && cd dist && echo npm publish"
+    "deploy": "npm run build && cd dist && npm publish"
   },
   "devDependencies": {
     "glob": "^7.1.3",
