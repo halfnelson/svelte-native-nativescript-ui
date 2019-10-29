@@ -1,6 +1,6 @@
 {
   "name": "svelte-native-nativescript-ui",
-  "version": "6.1.1",
+  "version": "0.6.0",
   "description": "Svelte Native support for Nativescript UI",
   "repository": {
     "type": "git",
@@ -43,8 +43,8 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-typescript2": "^0.24.0",
     "svelte": "^3.12.1",
-    "svelte-native": "file:../svelte-native/dist",
-    "tns-core-modules": "^6.1.2",
+    "svelte-native": "~0.6.0",
+    "tns-core-modules": "~6.1.2",
     "typescript": "^3.6.4"
   },
   "dependencies": {}
