@@ -12,7 +12,7 @@
             itemReorder="true"
             loadOnDemandMode="{ListViewLoadOnDemandMode.Manual}"
             itemTemplateSelector="{selectTemplate}"
-       
+            groupingFunction={groupSelector}
             on:itemTap="{onItemTap}"
             on:itemReordered="{onItemReordered}"
             on:pullToRefreshInitiated="{onPullToRefreshInitiated}"
@@ -59,9 +59,9 @@
             <label class="group">{item}</label>
         </Template>
 
-        <Template type="{ListViewViewType.ItemSwipeView}" let:item>
+        <Template type="{ListViewViewType.ItemSwipeView}">
             <gridLayout columns="*,auto" backgroundColor="red">
-                <label id="delete-view" col="1"  on:tap="{(e) => doDelete(e, item)}" class="far" text="&#xf2ed;"  />
+                <label id="delete-view" col="1"  on:tap="{e => doDelete(e.view.bindingContext)}" class="far" text="&#xf2ed;"  />
             </gridLayout>
         </Template>
     </radListView>
