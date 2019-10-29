@@ -85,7 +85,7 @@ The main differences are the assigning of configuration elements to their parent
 
 ### Automatic parent properties
 
-Most configuration elements in the nativescript-ui components only have a single valid parent component and property that they can be assigned to. Svelte Native sets the default parent property for these configuration elements where possible
+Most configuration elements in the nativescript-ui components only have a single valid parent component and property that they can be assigned to. Svelte Native sets the default parent property for these configuration elements where possible.
 
 eg
 ```html
@@ -107,7 +107,7 @@ becomes:
   <radCartesianChart id="cartesianChart">
     <categoricalAxis prop:horizontalAxis />
     <linearAxis prop:verticalAxis/>
-    <lineSeries items="{{ categoricalSource }}" categoryProperty="Country" valueProperty="Amount" />
+    <lineSeries items="{ categoricalSource }" categoryProperty="Country" valueProperty="Amount" />
   </radCartesianChart>
 ```
 
