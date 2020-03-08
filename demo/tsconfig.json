@@ -8,7 +8,7 @@
         "noEmitOnError": true,
         "skipLibCheck": true,
         "lib": [
-            "es6",
+            "es6"
         ],
         "types": [
             "./node_modules/svelte/"
@@ -17,9 +17,6 @@
         "paths": {
             "~/*": [
                 "app/*"
-            ],
-            "*": [
-                "./node_modules/*"
             ]
         }
     },

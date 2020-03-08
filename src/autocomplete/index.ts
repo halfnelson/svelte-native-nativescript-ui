@@ -61,7 +61,7 @@ export default class RadAutoCompleteTextViewElement extends NativeViewElementNod
         let componentClass = (suggestionView.__SvelteNativeElement__ as SuggestionViewElement).itemTemplateComponent;
         if (!componentClass) return null;
 
-        logger.debug("creating view for " + viewType);
+        logger.debug(() => "creating view for " + viewType);
 
         let wrapper = createElement('StackLayout') as NativeViewElementNode<View>;
         wrapper.setStyle("padding", 0)
@@ -89,7 +89,7 @@ export default class RadAutoCompleteTextViewElement extends NativeViewElementNod
 
         if (!view.__SvelteComponent__) {
             if (view.__SvelteComponentBuilder__) {
-                logger.debug("mounting to view "+view+" with props "+Object.keys(args.data).join(","));
+                logger.debug(() => "mounting to view "+view+" with props "+Object.keys(args.data).join(","));
                 view.__SvelteComponentBuilder__({ item: args.data });
                 view.__SvelteComponentBuilder__ = null;
                 return;
@@ -101,7 +101,7 @@ export default class RadAutoCompleteTextViewElement extends NativeViewElementNod
         }
     
         if (componentInstance) {
-            logger.debug("updating view "+view+" with props "+Object.keys(args.data).join(","));
+            logger.debug(() => "updating view "+view+" with props "+Object.keys(args.data).join(","));
             componentInstance.$set({ item: args.data })
         } 
     }

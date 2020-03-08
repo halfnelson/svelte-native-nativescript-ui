@@ -23,7 +23,7 @@ export default class RadListViewElement extends NativeViewElementNode<RadListVie
 
         let componentClass = this.getComponentForView(viewType);
         if (!componentClass) return null;
-        logger.debug("creating view for " + viewType);
+        logger.debug(() => "creating view for " + viewType);
 
         let wrapper = createElement('StackLayout') as NativeViewElementNode<View>;
         wrapper.setStyle("padding", 0)
@@ -79,7 +79,7 @@ export default class RadListViewElement extends NativeViewElementNode<RadListVie
             if (type.toLowerCase() != ListViewViewType.ItemView.toLowerCase()) return;
 
             let key = childNode.getAttribute('key') || "default"
-            logger.debug(`Adding template for key ${key}`);
+            logger.debug(() => `Adding template for key ${key}`);
             if (!this.nativeView.itemTemplates || typeof this.nativeView.itemTemplates == "string") {
                 this.nativeView.itemTemplates = []
             }
@@ -117,7 +117,7 @@ export default class RadListViewElement extends NativeViewElementNode<RadListVie
         let _view = view as any;
         if (!_view.__SvelteComponent__) {
             if (_view.__SvelteComponentBuilder__) {
-                logger.debug("mounting to view "+view+" with props "+Object.keys(props).join(","));
+                logger.debug(() => "mounting to view "+view+" with props "+Object.keys(props).join(","));
                 _view.__SvelteComponentBuilder__(props);
                 _view.__SvelteComponentBuilder__ = null;
                 return;
@@ -129,7 +129,7 @@ export default class RadListViewElement extends NativeViewElementNode<RadListVie
         }
     
         if (componentInstance) {
-            logger.debug("updating view "+view+" with props "+Object.keys(props).join(","));
+            logger.debug(() => "updating view "+view+" with props "+Object.keys(props).join(","));
             componentInstance.$set(props)
         } else {
             console.error("Couldn't find component for ", view);
@@ -143,7 +143,7 @@ export default class RadListViewElement extends NativeViewElementNode<RadListVie
         let items = listView.items;
 
         if (args.index >= items.length) {
-            logger.warn("Got request for item at index that didn't exist");
+            logger.warn(() => "Got request for item at index that didn't exist");
             return;
         }
 
