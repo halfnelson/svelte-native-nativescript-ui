@@ -1,5 +1,5 @@
 import { NativeViewElementNode, createElement, registerElement, NativeElementNode, logger, ViewNode, TemplateElement, SvelteKeyedTemplate } from "svelte-native/dom";
-import { RadListView, ListViewEventData, SwipeActionsEventData, ListViewLinearLayout, ListViewGridLayout, ListViewStaggeredLayout, ListViewViewType } from "nativescript-ui-listview";
+import { RadListView, ListViewEventData, SwipeActionsEventData, ListViewLinearLayout, ListViewGridLayout, ListViewStaggeredLayout, ListViewViewType, ReorderHandle } from "nativescript-ui-listview";
 import { View } from "tns-core-modules/ui/core/view";
 
 
@@ -166,6 +166,8 @@ export default class RadListViewElement extends NativeViewElementNode<RadListVie
         registerElement('listViewLinearLayout', () => new NativeElementNode('listViewLinearLayout', ListViewLinearLayout));
         registerElement('listViewGridLayout', () => new NativeElementNode('listViewGridLayout', ListViewGridLayout));
         registerElement('listViewStaggeredLayout', () => new NativeElementNode('listViewStaggeredLayout', ListViewStaggeredLayout));
+
+        registerElement('reorderHandle', () => new NativeViewElementNode('reorderHandle', ReorderHandle));
 
         registerElement('radlistview', () => new RadListViewElement());
     }
