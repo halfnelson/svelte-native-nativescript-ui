@@ -1,8 +1,8 @@
 import { registerElement, NativeElementNode, NativeElementPropType as PropType, TemplateElement, logger, createElement } from 'svelte-native/dom'
 import { NativeViewElementNode } from "svelte-native/dom";
 import { RadAutoCompleteTextView, TokenModel, SuggestionView, AutoCompleteViewType } from 'nativescript-ui-autocomplete';
-import { View } from 'tns-core-modules/ui/core/view';
-import { ItemEventData } from 'tns-core-modules/ui/list-view'
+import { View, ItemEventData } from '@nativescript/core';
+
 
 
 class SuggestionViewElement extends NativeElementNode<SuggestionView> {
@@ -46,7 +46,7 @@ export default class RadAutoCompleteTextViewElement extends NativeViewElementNod
             "items": PropType.Value,
             "hint": PropType.Value
         });
-        this.nativeElement.itemViewLoader = (viewType: string) => this.loadView(viewType)
+        (this.nativeElement as any).itemViewLoader = (viewType: string) => this.loadView(viewType)
         this.nativeView.on(RadAutoCompleteTextView.itemLoadingEvent, (args) => { this.updateListItem(args as AutocompleteItemEventData) });
 
     }

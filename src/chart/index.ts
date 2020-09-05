@@ -13,7 +13,7 @@ import { RadPieChart, RadCartesianChart, PieSeries, DonutSeries,
          ChartGridLineAnnotation, ChartPlotBandAnnotation 
 } from 'nativescript-ui-chart';
 
-import { View } from 'tns-core-modules/ui/core/view';
+import { View } from '@nativescript/core';
 
 class BaseChartElement<T extends View> extends NativeViewElementNode<T> {
     constructor(tagName: string, viewClass: new () => T) {

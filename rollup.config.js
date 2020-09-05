@@ -9,7 +9,7 @@ let localModules = ["sidedrawer", "listview", "calendar", "chart", "dataform", "
 
 let plugins = [
   resolve({
-    extensions: ['.mjs', '.js']
+    extensions: ['.js']
   }),
   typescript({
     typescript: require('typescript'),
@@ -23,9 +23,6 @@ function module_defs() {
       input: `src/${mod}/index.ts`,
       output: [{
         file: `dist/${mod}/index.js`,
-        format: 'cjs',
-      }, {
-        file: `dist/${mod}/index.mjs`,
         format: 'esm'
       }],
       external: (id) => externalModules.find(e => e == id || id.startsWith(e+'/') ) || id.startsWith('nativescript-ui'),
