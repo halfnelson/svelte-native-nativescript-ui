@@ -1,14 +1,4 @@
 {
-  "nativescript": {
-    "id": "technology.sveltenative.template",
-    "tns-ios": {
-      "version": "6.4.2"
-    },
-    "templateVersion": "v2",
-    "tns-android": {
-      "version": "6.4.1"
-    }
-  },
   "name": "tns-template-blank-svelte",
   "displayName": "Blank Svelte",
   "templateType": "App template",
@@ -19,24 +9,25 @@
   "license": "Apache-2.0",
   "repository": "https://github.com/halfnelson/svelte-native-template",
   "dependencies": {
-    "tns-core-modules": "~6.4.2",
     "nativescript-theme-core": "~2.0.24",
-    "svelte-native": "~0.8.0",
-    "nativescript-ui-calendar": "~6.0.0",
-    "nativescript-ui-chart": "~7.0.0",
-    "nativescript-ui-listview": "~8.0.1",
-    "nativescript-ui-sidedrawer": "~8.0.0",
-    "nativescript-ui-dataform": "~6.0.0",
-    "nativescript-ui-gauge": "~6.0.0",
-    "nativescript-ui-autocomplete": "~6.0.0",
-    "svelte-native-nativescript-ui": "file:../dist"
+    "svelte-native": "file:../../svelte-native/dist",
+    "nativescript-ui-calendar": "~7.0.2",
+    "nativescript-ui-chart": "~8.0.2",
+    "nativescript-ui-listview": "~9.0.2",
+    "nativescript-ui-sidedrawer": "~9.0.3",
+    "nativescript-ui-dataform": "~7.0.2",
+    "nativescript-ui-gauge": "~7.0.2",
+    "nativescript-ui-autocomplete": "~7.0.2",
+    "svelte-native-nativescript-ui": "file:../dist",
+    "@nativescript/core": "7.0.0",
+    "@nativescript/webpack": "3.0.0"
   },
   "devDependencies": {
-    "nativescript-dev-webpack": "~1.5.1",
-    "svelte": "~3.19.1",
+    "@nativescript/android": "7.0.0",
+    "svelte": "~3.24.1",
     "svelte-loader-hot": "0.1.1",
-    "svelte-native-preprocessor": "^0.1.7",
-    "typescript": "~3.7.5"
+    "svelte-native-preprocessor": "^0.2.0",
+    "typescript": "3.9.7"
   },
   "gitHead": "c06800e52ee1a184ea2dffd12a6702aaa43be4e3",
   "readme": "NativeScript Application"
