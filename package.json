@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/halfnelson/svelte-native-nativescript-ui#readme",
   "peerDependencies": {
-    "svelte-native": "file:../svelte-native/dist",
+    "svelte-native": "~0.9.0",
     "@nativescript/core": "~7.0.0"
   },
   "scripts": {
