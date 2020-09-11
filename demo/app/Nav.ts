@@ -7,7 +7,6 @@ let nav_frame;
 let drawer: RadSideDrawerElement;
 
 export function init(navFrame, navDrawer: RadSideDrawerElement, startPage) {
-    console.log("Setting nav frame:"+navFrame)
     nav_frame = navFrame;    
     drawer = navDrawer;
     current_page.set(startPage)

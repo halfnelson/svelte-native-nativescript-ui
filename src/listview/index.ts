@@ -1,6 +1,6 @@
 import { NativeViewElementNode, createElement, registerElement, NativeElementNode, logger, ViewNode, TemplateElement, SvelteKeyedTemplate } from "svelte-native/dom";
 import { RadListView, ListViewEventData, SwipeActionsEventData, ListViewLinearLayout, ListViewGridLayout, ListViewStaggeredLayout, ListViewViewType, ReorderHandle } from "nativescript-ui-listview";
-import { View } from "tns-core-modules/ui/core/view";
+import { View } from "@nativescript/core";
 
 
 
