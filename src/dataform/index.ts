@@ -1,6 +1,6 @@
 import { registerElement, registerNativeConfigElement, NativeElementNode, NativeElementPropType, NativeElementPropConfig } from 'svelte-native/dom'
 import { NativeViewElementNode } from "svelte-native/dom";
-import { RadDataForm, DataFormStackLayout, DataFormGridLayout, EntityProperty, PropertyEditor, PropertyEditorParams, PropertyEditorStyle, PropertyGroup, EmailValidator, IsTrueValidator, NonEmptyValidator, MaximumLengthValidator, MinimumLengthValidator, PhoneValidator, RangeValidator, RegExValidator } from 'nativescript-ui-dataform';
+import { RadDataForm, DataFormStackLayout, DataFormGridLayout, EntityProperty, PropertyEditor, PropertyEditorParams, PropertyEditorStyle, PropertyGroup, EmailValidator, IsTrueValidator, NonEmptyValidator, MaximumLengthValidator, MinimumLengthValidator, PhoneValidator, RangeValidator, RegExValidator, GroupTitleStyle } from 'nativescript-ui-dataform';
 
 export default class RadDataFormElement extends NativeViewElementNode<RadDataForm> {
     constructor() {
@@ -32,6 +32,7 @@ export default class RadDataFormElement extends NativeViewElementNode<RadDataFor
         registerConfigElement('PropertyEditorParams', PropertyEditorParams, "params");
         registerConfigElement('PropertyEditorStyle', PropertyEditorStyle, "propertyEditorStyle");
         registerConfigElement('PropertyGroup', PropertyGroup, "groups", { "properties": NativeElementPropType.Array });
+        registerConfigElement('GroupTitleStyle', GroupTitleStyle, "groupTitleStyle");
         registerConfigElement('EmailValidator', EmailValidator, "validators");
         registerConfigElement('IsTrueValidator', IsTrueValidator, "validators");
         registerConfigElement('NonEmptyValidator', NonEmptyValidator, "validators");
