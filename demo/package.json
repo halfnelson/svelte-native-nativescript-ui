@@ -13,7 +13,7 @@
     "nativescript-ui-gauge": "~8.0.0",
     "nativescript-ui-listview": "~10.0.1",
     "nativescript-ui-sidedrawer": "~10.0.1",
-    "svelte-native": "file:../../svelte-native/dist",
+    "svelte-native": "~1.0.0",
     "svelte-native-nativescript-ui": "file:../dist"
   },
   "devDependencies": {
