@@ -1,6 +1,5 @@
 
 import { svelteNativeNoFrame, DomTraceCategory } from "svelte-native";
-
 import RadListViewElement from "svelte-native-nativescript-ui/listview"
 import RadSideDrawerElement from "svelte-native-nativescript-ui/sidedrawer"
 import RadCalendarElement from "svelte-native-nativescript-ui/calendar"
