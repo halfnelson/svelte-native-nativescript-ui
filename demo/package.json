@@ -1,34 +1,29 @@
 {
-  "name": "tns-template-blank-svelte",
-  "displayName": "Blank Svelte",
-  "templateType": "App template",
-  "author": "David Pershouse (https://github.com/halfnelson)",
-  "version": "6.4.0",
-  "main": "app.js",
-  "description": "Blank template for Nativescript application using Svelte",
-  "license": "Apache-2.0",
-  "repository": "https://github.com/halfnelson/svelte-native-template",
+  "name": "nativescript-ui-demo-app",
+  "main": "app/app.ts",
+  "version": "1.0.0",
+  "private": true,
   "dependencies": {
-    "nativescript-theme-core": "~2.0.24",
+    "@nativescript/core": "~8.1.1",
+    "@nativescript/theme": "~3.0.1",
+    "nativescript-ui-autocomplete": "~8.0.0",
+    "nativescript-ui-calendar": "~8.0.1",
+    "nativescript-ui-chart": "~9.0.0",
+    "nativescript-ui-dataform": "~8.0.0",
+    "nativescript-ui-gauge": "~8.0.0",
+    "nativescript-ui-listview": "~10.0.1",
+    "nativescript-ui-sidedrawer": "~10.0.1",
     "svelte-native": "file:../../svelte-native/dist",
-    "nativescript-ui-calendar": "~7.0.2",
-    "nativescript-ui-chart": "~8.0.2",
-    "nativescript-ui-listview": "~9.0.2",
-    "nativescript-ui-sidedrawer": "~9.0.3",
-    "nativescript-ui-dataform": "~7.0.2",
-    "nativescript-ui-gauge": "~7.0.2",
-    "nativescript-ui-autocomplete": "~7.0.2",
-    "svelte-native-nativescript-ui": "file:../dist",
-    "@nativescript/core": "7.0.0",
-    "@nativescript/webpack": "3.0.0"
+    "svelte-native-nativescript-ui": "file:../dist"
   },
   "devDependencies": {
-    "@nativescript/android": "7.0.0",
-    "svelte": "~3.24.1",
-    "svelte-loader-hot": "0.1.1",
-    "svelte-native-preprocessor": "^0.2.0",
-    "typescript": "3.9.7"
-  },
-  "gitHead": "c06800e52ee1a184ea2dffd12a6702aaa43be4e3",
-  "readme": "NativeScript Application"
+    "@nativescript/android": "8.1.1",
+    "@nativescript/types": "~8.1.1",
+    "@nativescript/webpack": "~5.0.0",
+    "svelte": "^3.44.0",
+    "svelte-loader": "^3.1.2",
+    "svelte-native-preprocessor": "^1.0.0",
+    "svelte-preprocess": "^4.7.0",
+    "typescript": "~4.3.5"
+  }
 }

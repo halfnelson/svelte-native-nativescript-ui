@@ -1,18 +1,19 @@
 import { navigate } from 'svelte-native'
 import { writable } from 'svelte/store'
 import RadSideDrawerElement from 'svelte-native-nativescript-ui/sidedrawer';
+import { FrameElement } from 'svelte-native/dom';
 
-export let current_page = writable(null);
-let nav_frame;
+export let current_page = writable<typeof SvelteComponent>(undefined);
+let nav_frame: FrameElement
 let drawer: RadSideDrawerElement;
 
-export function init(navFrame, navDrawer: RadSideDrawerElement, startPage) {
+export function init(navFrame: FrameElement, navDrawer: RadSideDrawerElement, startPage: typeof SvelteComponent) {
     nav_frame = navFrame;    
     drawer = navDrawer;
     current_page.set(startPage)
 }
 
-export function goto(view, props)  {
+export function goto(view: typeof SvelteComponent, props: unknown)  {
     current_page.set(view);
     navigate({
        page: view,

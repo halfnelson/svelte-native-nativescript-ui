@@ -6,7 +6,7 @@
             <actionItem icon="font://&#xf00b;" class="fas" on:tap={() => layoutType = "linear"}></actionItem>
         {/if}
     </Header>
-    <radListView items={items} bind:this="{listView}"
+    <radListView items={items}
             swipeActions="true" 
             pullToRefresh="true"
             itemReorder="true"
@@ -67,6 +67,7 @@
     </radListView>
 </page>
 
+
 <style>
 
     #delete-view {
@@ -118,7 +119,6 @@
 
 <script>
     import Header from '../Header.svelte'
-    import { onMount } from 'svelte'
     import { Template } from 'svelte-native/components'
     import { ObservableArray } from 'tns-core-modules/data/observable-array'
     import { ListViewViewType, ListViewLoadOnDemandMode, ListViewLinearLayout, ListViewGridLayout, ListViewItemAnimation } from "nativescript-ui-listview"
@@ -143,7 +143,6 @@
         "font://\uf58C"
     ]
     let layoutType = "linear";
-    let listView;
 
     function generateItems(count, offset=0) {
         return (new Array(count).fill()).map((_, i) => ({ index: i, name: `Item ${i+offset}`, description: `Item ${i+offset} description`, image: images[(i+offset) % images.length]}))
