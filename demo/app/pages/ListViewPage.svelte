@@ -67,6 +67,7 @@
     </radListView>
 </page>
 
+
 <style>
 
     #delete-view {
@@ -197,6 +198,10 @@
     function selectTemplate(item, index, items) {
         return  (index % 2 == 0) ? "even" : "odd";
     }
+
+    onMount(() => {
+        console.log("mounted list view")
+    })
 
     function groupSelector(item) {
         return item.index < 20 ? "Under 20" : "Over 20";

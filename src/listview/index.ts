@@ -25,7 +25,7 @@ export default class RadListViewElement extends NativeViewElementNode<RadListVie
         if (!componentClass) return null;
         logger.debug(() => "creating view for " + viewType);
 
-        let wrapper = createElement('StackLayout') as NativeViewElementNode<View>;
+        let wrapper = createElement('StackLayout', this.ownerDocument) as NativeViewElementNode<View>;
         wrapper.setStyle("padding", 0)
         wrapper.setStyle("margin", 0)
         let nativeEl = wrapper.nativeView;

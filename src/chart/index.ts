@@ -13,9 +13,9 @@ import { RadPieChart, RadCartesianChart, PieSeries, DonutSeries,
          ChartGridLineAnnotation, ChartPlotBandAnnotation 
 } from 'nativescript-ui-chart';
 
-import { View } from '@nativescript/core';
+import { ViewBase } from '@nativescript/core';
 
-class BaseChartElement<T extends View> extends NativeViewElementNode<T> {
+class BaseChartElement<T extends ViewBase> extends NativeViewElementNode<T> {
     constructor(tagName: string, viewClass: new () => T) {
         super(tagName, viewClass, null, { "series": PropType.ObservableArray, 
                                     "annotations": PropType.ObservableArray, 

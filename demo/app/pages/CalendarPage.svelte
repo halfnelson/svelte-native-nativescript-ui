@@ -21,15 +21,15 @@
 
 
 //thanks to https://www.nativescript.org/blog/a-deep-dive-into-telerik-ui-for-nativescripts-calendar
-    var eventTitles = ["Lunch with Steve", "Meeting with Jane", "Q1 Recap Meeting"];
-    var events = [];
+    let eventTitles = ["Lunch with Steve", "Meeting with Jane", "Q1 Recap Meeting"];
+    let events = [];
 
-    var j = 1;
-    for (var i = 0; i < eventTitles.length; i++) {
-        var now = new Date();
-        var startDate = new Date(now.getFullYear(), now.getMonth(), j * 2, 12);
-        var endDate = new Date(now.getFullYear(), now.getMonth(), (j * 2), 13);
-        var event = new CalendarEvent(eventTitles[i], startDate, endDate);
+    let j = 1;
+    for (let i = 0; i < eventTitles.length; i++) {
+        let now = new Date();
+        let startDate = new Date(now.getFullYear(), now.getMonth(), j * 2, 12);
+        let endDate = new Date(now.getFullYear(), now.getMonth(), (j * 2), 13);
+        let event = new CalendarEvent(eventTitles[i], startDate, endDate);
         events.push(event);
         j++;
     }
