@@ -21,7 +21,7 @@
 </radSideDrawer>
 
 <script>
-    import { onMount, tick } from 'svelte/internal'
+    import { onMount } from 'svelte'
     import * as nav from './Nav'
     import ListViewPage from './pages/ListViewPage.svelte'
     import CalendarPage from './pages/CalendarPage.svelte'
@@ -37,11 +37,8 @@
     
     let drawer;
     let current_page = nav.current_page
-    console.log("inited app")
+
     onMount(() => {
-        console.log('mounted');
-        tick()
-       
         nav.init("navframe", drawer, ListViewPage)
     })
 
