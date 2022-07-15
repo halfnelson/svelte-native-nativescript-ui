@@ -46,7 +46,7 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-typescript2": "^0.27.2",
-    "svelte": "^3.44.0",
+    "svelte": "^3.49.0",
     "svelte-native": "~1.0.0",
     "typescript": "^4.4.4"
   }
